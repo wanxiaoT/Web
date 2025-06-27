@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一简工具箱 - 极简高效的Android工具集</title>
+
+    <!-- 私有style.css -->
+    <link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/gh/wanxiaoT/Web@main/AOneClick/library/style.css">
+
+    <!-- 图标资源 -->
+    <link rel="icon" href="./favicon.ico">
+
+    <style>
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal-backdrop.show {
+            opacity: 1;
+        }
+        .modal-content {
+            background: white;
+            margin: 2rem auto;
+            padding: 2rem;
+            max-width: 90%;
+            width: 1000px;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                padding: 1rem;
+                min-height: auto;
+            }
+            iframe.modal-iframe {
+                height: 70vh;
+                min-height: 400px;
+            }
+        }
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        iframe.modal-iframe {
+            width: 100%;
+            height: calc(100vh - 150px);
+            min-height: 600px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>一简工具箱</h1>
+            <!--
+            <p class="subtitle">极简设计 · 简单操作 · 高效使用</p>
+            <div class="cta-buttons">
+                <a href="#features" class="btn primary">功能特性</a>
+                <a href="#download" class="btn secondary">立即下载</a>
+            </div>
+            -->
+        </div>
+        <div class="hero-image">
+            <div class="phone-mockup">
+                <div class="screen"></div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <section id="download" class="download">
+        <div class="download-card">
+            <h2>立即体验</h2>
+            <p>扫描二维码下载或点击下方按钮</p>
+            <div class="qr-code"></div>
+            <a href="https://aone.click" class="btn primary download-btn">下载APK</a>
+            <div class="version-info">当前版本: v0.70 2025/6/23更新</div>
+        </div>
+    </section>
+
+    <div style="text-align: center;">
+        <a href="/library/" >特别鸣谢</a>
+    </div>
+    
+    <div class="ssl-container">
+        <a href="https://ipw.cn/ssl/?site=aone.click" title="本站支持SSL安全访问" target='_blank'><img style='display:inline-block;vertical-align:middle' alt="本站支持SSL安全访问" src="https://static.ipw.cn/icon/ssl-s4.svg"></a>
+    </div>
+    
+    <footer>
+        
+    </footer>
+    
+    <!-- 模态窗口 -->
+    <div id="thanksModal" class="modal-backdrop">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <iframe src="library/index.html" class="modal-iframe"></iframe>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
