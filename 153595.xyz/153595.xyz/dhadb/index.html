@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蛋黄工具箱 | 为刷机而生</title>
+    <style>
+        /* 全局主题色 */
+        :root {
+            --gold: linear-gradient(135deg, #FFD700 0%, #FFAA33 100%);
+            --dark: #1A1A1A;
+            --light: rgba(255,255,255,0.9);
+        }
+
+        /* 去除超链接下划线 */
+        a {
+            text-decoration: none;
+            color: antiquewhite;
+        }
+            /* 超链接鼠标悬停变金色 */
+        a:hover {
+            text-decoration: none;
+            color: gold;
+        }
+
+        /* 重置默认样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui;
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* 动态粒子背景 */
+        #particles {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            background: radial-gradient(circle at 50% 100%, #2B2B2B 0%, #1A1A1A 100%);
+        }
+
+        /* 导航栏 */
+        .nav-bar {
+            position: relative;
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 2;
+        }
+        .logo {
+            background: var(--gold);
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(255,215,0,0.3);
+        }
+
+        /* 主视觉区 */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            z-index: 1;
+        }
+        .hero-content {
+            max-width: 600px;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            background: var(--gold);
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+        }
+
+        /* 按钮设置 */
+        .buttonstyle {
+            background: transparent; /* 按钮背景透明 */
+            border: none; /* 边框透明 */
+            outline: none; /* 点击后无边框 */
+            position: relative;
+            font-size: 25px;
+            color: #ffffff;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            transition-duration: 0.6s;
+            text-decoration: none;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        /* 按钮设置 */
+        .buttonstyle:hover {
+            color: gold;
+        }
+        /* 功能卡片 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 4rem 10%;
+        }
+        .card {
+            background: rgba(40,40,40,0.8);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: 1px solid rgba(255,215,0,0.1);
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255,215,0,0.15);
+        }
+        .card h3 {
+            color: #FFD700;
+            margin-bottom: 1rem;
+        }
+
+        /* 动态装饰元素 */
+        .glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 60%);
+            filter: blur(80px);
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles"></canvas>
+    
+    <!-- 导航 -->
+    <nav class="nav-bar">
+        <div class="logo"><a href="153595.xyz/dhadb">蛋黄工具箱</a></div>
+        <div class="nav-links">
+            <a href="#features">功能</a>
+            <a href="#docs">文档</a>
+            <a href="#download">下载</a>
+        </div>
+    </nav>
+
+    <!-- 主视觉区 -->
+    <section class="hero">
+        <div class="glow" style="top:30%;left:20%"></div>
+        <div class="hero-content">
+            <h1>快无止境<br>新一代刷机方式</h1>
+            <p>集成调试、性能监测、工具教程于一体的专业级工具套件</p>
+            <button class="buttonstyle"><a href="https://bing.com/">立即体验</a></button>
+        </div>
+    </section>
+
+    <!-- 功能展示 -->
+    <section id="features" class="card-grid">
+        <div class="card">
+            <h3>实时调试监控</h3>
+            <p>可视化ADB命令流与设备状态追踪</p>
+        </div>
+        <div class="card">
+            <h3>无线部署系统</h3>
+            <p>安全稳定的Wi-Fi调试解决方案</p>
+        </div>
+        <div class="card">
+            <h3>性能分析套件</h3>
+            <p>CPU/内存/网络全维度监控仪表盘</p>
+        </div>
+    </section>
+
+    <script>
+        // 粒子背景动画
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = Math.random() * 0.5 + 0.5;
+                this.alpha = Math.random() * 0.5 + 0.5;
+                this.size = Math.random() * 2 + 1;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.y > canvas.height) this.reset();
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255,215,0,${this.alpha})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // 初始化画布
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = Array(100).fill().map(() => new Particle());
+        }
+
+        // 动画循环
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        // 响应式处理
+        window.addEventListener('resize', init);
+        init();
+        animate();
+
+        // 卡片交互
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
+            });
+        });
+    </script>
+</body>
+</html>
